@@ -1,6 +1,6 @@
-This is my own README. Please see also the original [README](README).
+This is my own README for the [Free42 project](thomasokken.com/free42). Please see also the original [README](README).
 
-Recently I discovered that a clone of HP42S might surface from SwissMicros, and I contacted the [Free42S forum](https://groups.google.com/forum/#!forum/free42discuss) to see if there was any willingness to further open source this project (*).
+Recently I discovered that an HP42S clone might surface from SwissMicros, and I contacted the [Free42S forum](https://groups.google.com/forum/#!forum/free42discuss) to see if there was any willingness to further open source this project (*).
 
 One might wonder what the relation is between those two projects: it's all about **preservation**.
 
