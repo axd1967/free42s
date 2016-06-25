@@ -33,10 +33,10 @@ Thanks
 The current arrangement is more efficient. If someone wants to hack Free42, they can use the source code tarball from my web site, and if they want to contribute their code to the project, they can send me the code (or a diff) and I'll merge it into my source database. This is a bit more work than if others would be able to commit their work directly, but it saves me the overhead of maintaining yet another site... Besides, as long as I'm running this project, I want to be able to veto any code changes I don't like, and by having everything go through my hands before it is merged into my source database, code reviews are a natural part of the process.
 Now, if someone wanted to start a community project, say, to transform Free42 into something more sophisticated, with multiple developers actively contributing, then using a public source database would make sense, but I have never gotten the impression that there is a lot of interest in that. (Of course there is also the issue that *I* am not interested in making major modifications or functionality extensions to Free42, so any such project would pretty much have to be a fork.)
 
-* Know what? The sourcecode *is* available, see [build-src-doc](build-src-doc). Except that svn://mactv/free42/trunk is not reachable, and would already require to be edited in order to compile. See? This is exactly the problem - a truly open source project should not have this kind of issues (so this is a first action point to tackle). And at least the [history file](HISTORY) seems to be available and matches http://thomasokken.com/free42/history.html, so there is a kind of syncing in the project.
+* Know what? The sourcecode *is* available, see [build-src-doc](build-src-doc). Except that (e.g.) `svn://mactv/free42/trunk` is not reachable, and would already require to be edited in order to compile. See? This is exactly the problem - a truly open source project should not have this kind of issues (so this is a first action point to tackle). And at least the [history file](HISTORY) seems to be available and matches http://thomasokken.com/free42/history.html, so there is a kind of syncing in the project.
 
 # What is missing in this project
-There is more important stuff scattered around that belongs in the repository:
+There is more important stuff scattered around that belongs in the repository (or maybe better in subprojects, but they should remain together):
 
 * the Alternative HP-42S/Free42 Manual, written by José Lauro Strapasson and Russ Jones, in source form
 * documentation of the extensions
@@ -44,6 +44,7 @@ There is more important stuff scattered around that belongs in the repository:
     * import/export feature http://thomasokken.com/free42/importexport.html
 * example 42S programs (http://thomasokken.com/free42/42progs/index.html)
 * the HP42S Code Editor of Andreas Granberg (http://thomasokken.com/free42/code-editor/)
+* install instructions such as http://thomasokken.com/free42/42progs/InstallationinstructionsforFree42.htm
 * (sourcecode of) the tools needed to run Free42S images on the forthcoming DM-42
 
 (the list is probably not finished)
