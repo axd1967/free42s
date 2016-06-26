@@ -22,7 +22,7 @@ Web pages could be e.g. Markdown pages inside a project (which gives a nice rend
 Don't believe me? Try http://www.hp42s.com/ (it's referenced in the [WP article](https://en.wikipedia.org/wiki/HP-42S)).
 
 # What is missing in this project
-There is more important stuff scattered around that belongs in the repository (or maybe better in subprojects, but they should remain together):
+There is more important stuff scattered around that belongs in the repository (or maybe better in subprojects, but they should remain together under a "master HP42 umbrella project"):
 
 * the Alternative HP-42S/Free42 Manual, written by José Lauro Strapasson and Russ Jones, in source form
 * documentation of the extensions
