@@ -25,7 +25,7 @@
 
 #import "CalcView.h"
 #import "PrintView.h"
-#import "Free42AppDelegate.h"
+#import "RootViewController.h"
 #import "free42.h"
 #import "core_main.h"
 #import "core_display.h"
@@ -185,7 +185,7 @@ static CalcView *calcView = nil;
         switch (buttonIndex) {
             case 0:
                 // Show Print-Out
-                [Free42AppDelegate showPrintOut];
+                [RootViewController showPrintOut];
                 break;
             case 1:
                 // Program Import & Export
@@ -193,11 +193,11 @@ static CalcView *calcView = nil;
                 break;
             case 2:
                 // Preferences
-                [Free42AppDelegate showPreferences];
+                [RootViewController showPreferences];
                 break;
             case 3:
                 // Select Skin
-                [Free42AppDelegate showSelectSkin];
+                [RootViewController showSelectSkin];
                 break;
             case 4:
                 // Copy
@@ -209,7 +209,7 @@ static CalcView *calcView = nil;
                 break;
             case 6:
                 // About Free42
-                [Free42AppDelegate showAbout];
+                [RootViewController showAbout];
                 break;
             case 7:
                 // Cancel
@@ -219,15 +219,15 @@ static CalcView *calcView = nil;
         switch (buttonIndex) {
             case 0:
                 // HTTP Server
-                [Free42AppDelegate showHttpServer];
+                [RootViewController showHttpServer];
                 break;
             case 1:
                 // Import Programs
-                [Free42AppDelegate doImport];
+                [RootViewController doImport];
                 break;
             case 2:
                 // Export Programs
-                [Free42AppDelegate doExport];
+                [RootViewController doExport];
                 break;
             case 3:
                 // Back
@@ -400,8 +400,8 @@ static CalcView *calcView = nil;
 
     long w, h;
     skin_load(&w, &h);
-    skin_width = w;
-    skin_height = h;
+    skin_width = (int) w;
+    skin_height = (int) h;
     
     core_init(init_mode, version);
     if (statefile != NULL) {
@@ -739,12 +739,12 @@ void shell_beeper(int frequency, int duration) {
     const int cutoff_freqs[] = { 164, 220, 243, 275, 293, 324, 366, 418, 438, 550 };
     for (int i = 0; i < 10; i++) {
         if (frequency <= cutoff_freqs[i]) {
-            [Free42AppDelegate playSound:i];
+            [RootViewController playSound:i];
             shell_delay(250);
             return;
         }
     }
-    [Free42AppDelegate playSound:10];
+    [RootViewController playSound:10];
     shell_delay(125);
 }
 
@@ -776,6 +776,10 @@ void shell_annunciators(int updn, int shf, int prt, int run, int g, int rad) {
     }
 }
 
+void shell_log(const char *message) {
+    NSLog(@"%s", message);
+}
+
 int shell_wants_cpu() {
     TRACE("shell_wants_cpu");
     return we_want_cpu;
@@ -801,13 +805,13 @@ int shell_read_saved_state(void *buf, int bufsize) {
     if (statefile == NULL)
         return -1;
     else {
-        int n = fread(buf, 1, bufsize, statefile);
+        size_t n = fread(buf, 1, bufsize, statefile);
         if (n != bufsize && ferror(statefile)) {
             fclose(statefile);
             statefile = NULL;
             return -1;
         } else
-            return n;
+            return (int) n;
     }
 }
 
@@ -816,7 +820,7 @@ bool shell_write_saved_state(const void *buf, int nbytes) {
     if (statefile == NULL)
         return false;
     else {
-        int n = fwrite(buf, 1, nbytes, statefile);
+        size_t n = fwrite(buf, 1, nbytes, statefile);
         if (n != nbytes) {
             fclose(statefile);
             remove("config/state");
@@ -935,6 +939,8 @@ void shell_print(const char *text, int length,
                 show_message("Message", buf);
                 goto done_print_txt;
             }
+            if (ftell(print_txt) == 0)
+                fwrite("\357\273\277", 1, 3, print_txt);
         }
         
         shell_spool_txt(text, length, txt_writer, txt_newliner);
@@ -954,7 +960,7 @@ void shell_print(const char *text, int length,
         
         if (print_gif == NULL) {
             while (1) {
-                int len, p;
+                ssize_t len, p;
                 
                 gif_seq = (gif_seq + 1) % 10000;
                 
@@ -1146,7 +1152,7 @@ static void show_message(const char *title, const char *message) {
 }
 
 static void txt_writer(const char *text, int length) {
-    int n;
+    size_t n;
     if (print_txt == NULL)
         return;
     n = fwrite(text, 1, length, print_txt);
@@ -1163,6 +1169,7 @@ static void txt_writer(const char *text, int length) {
 static void txt_newliner() {
     if (print_txt == NULL)
         return;
+    fputc('\r', print_txt);
     fputc('\n', print_txt);
     fflush(print_txt);
 }   
@@ -1181,7 +1188,7 @@ static void gif_seeker(int4 pos) {
 }
 
 static void gif_writer(const char *text, int length) {
-    int n;
+    size_t n;
     if (print_gif == NULL)
         return;
     n = fwrite(text, 1, length, print_gif);

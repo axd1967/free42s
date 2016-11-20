@@ -1876,6 +1876,7 @@ static void txt_writer(const char *text, int length) {
 static void txt_newliner() {
     if (print_txt == NULL)
         return;
+    fputc('\r', print_txt);
     fputc('\n', print_txt);
     fflush(print_txt);
 }   
@@ -2160,6 +2161,8 @@ void shell_print(const char *text, int length,
                 show_message("Message", buf);
                 goto done_print_txt;
             }
+            if (ftell(print_txt) == 0)
+                fwrite("\357\273\277", 1, 3, print_txt);
         }
 
         shell_spool_txt(text, length, txt_writer, txt_newliner);
@@ -2231,6 +2234,15 @@ void shell_print(const char *text, int length,
         gif_lines += height;
         done_print_gif:;
     }
+}
+
+static FILE *logfile = NULL;
+
+void shell_log(const char *message) {
+    if (logfile == NULL)
+        logfile = fopen("free42.log", "w");
+    fprintf(logfile, "%s\n", message);
+    fflush(logfile);
 }
 
 int shell_write(const char *buf, int4 buflen) {

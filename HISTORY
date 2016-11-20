@@ -1,3 +1,33 @@
+2016-10-03: release 1.5.12
+
+* Android version: Fixed UTF-8 printing, which was broken in 1.5.11.
+* All versions: when printing to text, up-arrow now looks like an up-arrow,
+  instead of a caret.
+
+2016-10-01: release 1.5.11
+
+* EXITALL didn't always exit all menus. Fixed.
+* Print-to-text now emits UTF-8 encoded text, instead of ISO-8859-1.
+* Print-to-text now emits CRLF line separators on all platforms.
+* Android version: didn't save the "raw text" print setting. Fixed.
+* Android version: added landscape skin; made it the default for landscape mode
+  in new installs.
+
+2016-09-04: release 1.5.10 (Android, Windows, Mac, and Linux)
+
+* Fixed AGRAPH bug with complex number in X.
+
+2016-09-04: release 1.5.9 (Android, Windows, Mac, and Linux)
+
+* Now building the Intel Decimal Floating-Point Math Library from source for
+  all targets. In terms of the end user, this makes no difference, but it will
+  make life easier for people who want to port Free42 to platforms that I don't
+  support myself (FreeBSD, Solaris, etc.); those platforms were left out in the
+  cold when I started using the Intel library and only provided pre-built
+  binaries for the supported platforms.
+* Implemented range reduction for more accurate TAN in DEG and GRAD modes.
+* Android version: now handles orientation change more efficiently.
+
 2016-04-26: release 1.5.8f (Android only)
 
 * Rolled back 8e, which was a disaster; it didn't fix the remaining black

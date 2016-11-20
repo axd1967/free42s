@@ -1122,6 +1122,8 @@ void shell_print(const char *text, int length,
                 show_message("Message", buf);
                 goto done_print_txt;
             }
+            if (ftell(print_txt) == 0)
+                fwrite("\357\273\277", 1, 3, print_txt);
         }
         
         shell_spool_txt(text, length, txt_writer, txt_newliner);
@@ -1258,6 +1260,10 @@ int shell_read(char *buf, int4 buflen) {
         return -1;
     } else
         return nread;
+}
+
+void shell_log(const char *message) {
+    NSLog(@"%s", message);
 }
 
 int shell_wants_cpu() {
@@ -1405,6 +1411,7 @@ static void txt_writer(const char *text, int length) {
 static void txt_newliner() {
     if (print_txt == NULL)
         return;
+    fputc('\r', print_txt);
     fputc('\n', print_txt);
     fflush(print_txt);
 }   

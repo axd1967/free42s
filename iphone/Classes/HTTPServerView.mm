@@ -27,6 +27,7 @@
 
 #import "HTTPServerView.h"
 #import "Free42AppDelegate.h"
+#import "RootViewController.h"
 
 // From simpleserver.c
 void handle_client(int csock);
@@ -149,7 +150,7 @@ static void *getHostName(void *dummy) {
 - (IBAction) done {
     [UIApplication sharedApplication].idleTimerDisabled = NO;
     write(pype[1], "1\n", 2);
-    [Free42AppDelegate showMain];
+    [RootViewController showMain];
 }
 
 - (void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
@@ -168,7 +169,7 @@ static void *getHostName(void *dummy) {
 }
 
 static void *handle_client_2(void *param) {
-    handle_client((int) param);
+    handle_client((int) (intptr_t) param);
     return NULL;
 }
 
@@ -240,7 +241,7 @@ static void *handle_client_2(void *param) {
         inet_ntop(AF_INET, &ca.sin_addr, cname, sizeof(cname));
         errprintf("Accepted connection from %s\n", cname);
         pthread_t thread;
-        pthread_create(&thread, NULL, handle_client_2, (void *) csock);
+        pthread_create(&thread, NULL, handle_client_2, (void *) (intptr_t) csock);
         pthread_detach(thread);
     }
     
@@ -290,7 +291,7 @@ char *make_temp_file() {
     static int fileno = 0;
     NSString *path = [NSString stringWithFormat:@"%@/tempzip.%d", NSTemporaryDirectory(), ++fileno];
     const char *cpath = [path UTF8String];
-    int len = strlen(cpath);
+    size_t len = strlen(cpath);
     char *ret = (char *) malloc(len + 1);
     strcpy(ret, cpath);
     return ret;

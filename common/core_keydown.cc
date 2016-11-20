@@ -54,7 +54,7 @@ static void set_solve_integ(int solve) {
         if (!flags.f.prgm_mode)
             display_error(ERR_NO_MENU_VARIABLES, 0);
     } else {
-        int err = set_menu_return_err(MENULEVEL_APP, MENU_CATALOG);
+        int err = set_menu_return_err(MENULEVEL_APP, MENU_CATALOG, false);
         if (err == ERR_NONE) {
             set_cat_section(solve ? CATSECT_PGM_SOLVE : CATSECT_PGM_INTEG);
             move_cat_row(0);
@@ -2151,7 +2151,11 @@ void keydown_normal_mode(int shift, int key) {
                 } else if (catsect == CATSECT_FCN) {
                     int cmd = get_cat_item(menukey);
                     if (cmd == -1)
-                        cmd = CMD_NULL;
+                        if (flags.f.prgm_mode) {
+                            pending_command = CMD_NULL;
+                            return;
+                        } else
+                            cmd = CMD_NULL;
                     if (level == MENULEVEL_TRANSIENT
                             || !mode_plainmenu_sticky)
                         set_menu(level, MENU_NONE);
@@ -2254,7 +2258,10 @@ void keydown_normal_mode(int shift, int key) {
                 if (level == MENULEVEL_TRANSIENT
                         || (level == MENULEVEL_PLAIN && !mode_plainmenu_sticky))
                     set_menu(level, MENU_NONE);
-                do_interactive(cmd_id);
+                if (cmd_id == CMD_NULL && flags.f.prgm_mode)
+                    pending_command = CMD_NULL;
+                else
+                    do_interactive(cmd_id);
                 return;
             }
         }

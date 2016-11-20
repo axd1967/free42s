@@ -67,6 +67,9 @@
 		E98DD7700F8C1A210089D9FA /* tone8.wav in Resources */ = {isa = PBXBuildFile; fileRef = E98DD7650F8C1A210089D9FA /* tone8.wav */; };
 		E98DD7710F8C1A210089D9FA /* tone9.wav in Resources */ = {isa = PBXBuildFile; fileRef = E98DD7660F8C1A210089D9FA /* tone9.wav */; };
 		E98FA4840F913E2900DED348 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E98FA4830F913E2900DED348 /* icon.png */; };
+		E997E4AB1CF0FAFE009939CE /* readtest.c in Sources */ = {isa = PBXBuildFile; fileRef = E997E4AA1CF0FAFE009939CE /* readtest.c */; settings = {COMPILER_FLAGS = "-D__intptr_t_defined -DLINUX"; }; };
+		E997E4AD1CF0FB12009939CE /* readtest_lines.cc in Sources */ = {isa = PBXBuildFile; fileRef = E997E4AC1CF0FB12009939CE /* readtest_lines.cc */; };
+		E997E4B01CF11ED4009939CE /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E997E4AF1CF11ED4009939CE /* RootViewController.mm */; };
 		E99FDE5E1162508C004DB479 /* core_commands7.cc in Sources */ = {isa = PBXBuildFile; fileRef = E99FDE5C1162508C004DB479 /* core_commands7.cc */; };
 		E9B16DFA0F88EE46002BB9B2 /* shell_loadimage.cc in Sources */ = {isa = PBXBuildFile; fileRef = E9B16DF80F88EE46002BB9B2 /* shell_loadimage.cc */; };
 		E9B1D9230FAC7C51000EB4CD /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = E9B1D9220FAC7C51000EB4CD /* VERSION */; };
@@ -174,6 +177,10 @@
 		E98DD7650F8C1A210089D9FA /* tone8.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tone8.wav; sourceTree = "<group>"; };
 		E98DD7660F8C1A210089D9FA /* tone9.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tone9.wav; sourceTree = "<group>"; };
 		E98FA4830F913E2900DED348 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		E997E4AA1CF0FAFE009939CE /* readtest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = readtest.c; path = IntelRDFPMathLib20U1/TESTS/readtest.c; sourceTree = "<group>"; };
+		E997E4AC1CF0FB12009939CE /* readtest_lines.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = readtest_lines.cc; sourceTree = "<group>"; };
+		E997E4AE1CF11ED4009939CE /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		E997E4AF1CF11ED4009939CE /* RootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RootViewController.mm; sourceTree = "<group>"; };
 		E99FDE5C1162508C004DB479 /* core_commands7.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = core_commands7.cc; path = ../common/core_commands7.cc; sourceTree = SOURCE_ROOT; };
 		E99FDE5D1162508C004DB479 /* core_commands7.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = core_commands7.h; path = ../common/core_commands7.h; sourceTree = SOURCE_ROOT; };
 		E9B16DF80F88EE46002BB9B2 /* shell_loadimage.cc */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shell_loadimage.cc; path = ../common/shell_loadimage.cc; sourceTree = SOURCE_ROOT; tabWidth = 8; usesTabs = 1; };
@@ -234,6 +241,8 @@
 				E9200DFA169A0004001BC4B5 /* PrintTileView.mm */,
 				E9200DF41699E1EC001BC4B5 /* PrintView.h */,
 				E9200DF51699E1EC001BC4B5 /* PrintView.mm */,
+				E997E4AE1CF11ED4009939CE /* RootViewController.h */,
+				E997E4AF1CF11ED4009939CE /* RootViewController.mm */,
 				E9CD21690FA39C41008E1E65 /* SelectFileView.h */,
 				E977D07E1698FB4E00AA3FD9 /* SelectFileView.mm */,
 				E908D3EB16D04D92000710EB /* SelectProgramsView.h */,
@@ -285,6 +294,8 @@
 				E9F7136A16C5F1F0006A9553 /* minizip_zip.c */,
 				E9F7136B16C5F1F0006A9553 /* minizip_zip.h */,
 				E91CC1D30F8C1FE900EE702C /* simpleserver.c */,
+				E997E4AA1CF0FAFE009939CE /* readtest.c */,
+				E997E4AC1CF0FB12009939CE /* readtest_lines.cc */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -395,6 +406,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Free42" */;
 			buildPhases = (
+				E997E4A91CF0F9DB009939CE /* ShellScript */,
 				E91CC1BE0F8C1DDE00EE702C /* Run Script */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -487,8 +499,21 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
+			shellPath = "/bin/sh -x";
 			shellScript = "touch main.m\ncd simpleserver\nmake icons.c\n";
+		};
+		E997E4A91CF0F9DB009939CE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "/bin/sh -x";
+			shellScript = "if [ -f gcc111libbid.a ]; then exit 0; fi\nARCHS=(arm64 armv7 x86_64 i386)\nLIBNAMES=\nfor ARCH in ${ARCHS[@]}; do\n  rm -rf IntelRDFPMathLib20U1\n  tar xvfz ../inteldecimal/IntelRDFPMathLib20U1.tar.gz\n  cd IntelRDFPMathLib20U1\n  patch -p0 <../intel-lib-iphone-$ARCH.patch\n  cd LIBRARY\n  make CC=gcc CALL_BY_REF=1 GLOBAL_RND=1 GLOBAL_FLAGS=1 UNCHANGED_BINARY_FLAGS=0\n  mv libbid.a ../../gcc111libbid-$ARCH.a\n  LIBNAMES=\"$LIBNAMES gcc111libbid-$ARCH.a\"\n  cd ../..\ndone\nlipo -create $LIBNAMES -output gcc111libbid.a\n( echo '#ifdef FREE42_FPTEST'; echo 'const char *readtest_lines[] = {'; tr -d '\\r' < IntelRDFPMathLib20U1/TESTS/readtest.in | sed 's/^\\(.*\\)$/\"\\1\",/'; echo '0 };'; echo '#endif' ) > readtest_lines.cc\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -504,6 +529,7 @@
 				E91005D30F893F8900B68C27 /* core_commands3.cc in Sources */,
 				E91005D40F893F8900B68C27 /* core_commands4.cc in Sources */,
 				E91005D50F893F8900B68C27 /* core_commands5.cc in Sources */,
+				E997E4AD1CF0FB12009939CE /* readtest_lines.cc in Sources */,
 				E91005D60F893F8900B68C27 /* core_commands6.cc in Sources */,
 				E91005D70F893F8900B68C27 /* core_display.cc in Sources */,
 				E91005D80F893F8900B68C27 /* core_globals.cc in Sources */,
@@ -526,9 +552,11 @@
 				E977D0851698FB4E00AA3FD9 /* HTTPServerView.mm in Sources */,
 				E977D0881698FB4E00AA3FD9 /* PreferencesView.mm in Sources */,
 				E977D08A1698FB4E00AA3FD9 /* SelectFileView.mm in Sources */,
+				E997E4B01CF11ED4009939CE /* RootViewController.mm in Sources */,
 				E977D08B1698FB4E00AA3FD9 /* SelectSkinView.mm in Sources */,
 				E977D08D1698FB4E00AA3FD9 /* shell_skin_iphone.mm in Sources */,
 				E977D09A1699050400AA3FD9 /* URLButton.mm in Sources */,
+				E997E4AB1CF0FAFE009939CE /* readtest.c in Sources */,
 				E9200DF61699E1EC001BC4B5 /* CalcView.mm in Sources */,
 				E9200DF71699E1EC001BC4B5 /* Free42AppDelegate.mm in Sources */,
 				E9200DF81699E1EC001BC4B5 /* PrintView.mm in Sources */,
@@ -550,6 +578,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -560,10 +589,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				"OTHER_CFLAGS[arch=*]" = "-DFREE42_FPTEST";
 				PRODUCT_NAME = Free42;
-				PROVISIONING_PROFILE = "c3426ab6-2f2d-42ee-b01f-91527fbca099";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
 		};
@@ -571,9 +601,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Free42_Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
@@ -583,9 +614,9 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = Free42;
-				PROVISIONING_PROFILE = "c3426ab6-2f2d-42ee-b01f-91527fbca099";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;
 		};
@@ -612,7 +643,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_MISSING_PARENTHESES = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -643,7 +674,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_MISSING_PARENTHESES = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 			};
@@ -673,7 +704,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_MISSING_PARENTHESES = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 			};
@@ -686,6 +717,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Free42_Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
@@ -695,9 +727,9 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = Free42;
-				PROVISIONING_PROFILE = "c3426ab6-2f2d-42ee-b01f-91527fbca099";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Distribution;
 		};

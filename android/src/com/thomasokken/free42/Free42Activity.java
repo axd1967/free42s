@@ -88,7 +88,7 @@ import android.widget.TextView;
  */
 public class Free42Activity extends Activity {
 
-    private static final String[] builtinSkinNames = new String[] { "Standard" };
+    private static final String[] builtinSkinNames = new String[] { "Standard", "Landscape" };
     
     private static final int SHELL_VERSION = 9;
     
@@ -352,6 +352,33 @@ public class Free42Activity extends Activity {
         menu.add(Menu.NONE, Menu.NONE, builtinSkinNames.length, "Skin: Other...");
         
         return true;
+    }
+    
+    @Override
+    public void onConfigurationChanged(Configuration newConf) {
+        super.onConfigurationChanged(newConf);
+        orientation = newConf.orientation == Configuration.ORIENTATION_LANDSCAPE ? 1 : 0;
+        boolean[] ann_state = skin.getAnnunciators();
+        skin = null;
+        if (skinName[orientation].length() == 0 && externalSkinName[orientation].length() > 0) {
+            try {
+                skin = new SkinLayout(externalSkinName[orientation], skinSmoothing[orientation], displaySmoothing[orientation],ann_state);
+            } catch (IllegalArgumentException e) {}
+        }
+        if (skin == null) {
+            try {
+                skin = new SkinLayout(skinName[orientation], skinSmoothing[orientation], displaySmoothing[orientation],ann_state);
+            } catch (IllegalArgumentException e) {}
+        }
+        if (skin == null) {
+            try {
+                skin = new SkinLayout(builtinSkinNames[0], skinSmoothing[orientation], displaySmoothing[orientation],ann_state);
+            } catch (IllegalArgumentException e) {
+                // This one should never fail; we're loading a built-in skin.
+            }
+        }
+        calcView.invalidate();
+        core_repaint_display();
     }
     
     private void cancelRepeaterAndTimeouts1And2() {
@@ -624,6 +651,7 @@ public class Free42Activity extends Activity {
         cs.matrix_singularmatrix = preferencesDialog.getSingularMatrixError();
         cs.matrix_outofrange = preferencesDialog.getMatrixOutOfRange();
         cs.auto_repeat = preferencesDialog.getAutoRepeat();
+        cs.raw_text = preferencesDialog.getRawText();
         keyClicksEnabled = preferencesDialog.getKeyClicks();
         keyVibrationEnabled = preferencesDialog.getKeyVibration();
         int oldOrientation = preferredOrientation;
@@ -631,7 +659,7 @@ public class Free42Activity extends Activity {
         style = preferencesDialog.getStyle();
         putCoreSettings(cs);
 
-        ShellSpool.rawText = cs.raw_text = preferencesDialog.getRawText();
+        ShellSpool.rawText = cs.raw_text;
         ShellSpool.maxGifHeight = preferencesDialog.getMaxGifHeight();
 
         boolean newPrintEnabled = preferencesDialog.getPrintToText();
@@ -1140,8 +1168,8 @@ public class Free42Activity extends Activity {
             externalSkinName[0] = topStorageDir() + "/Free42/" + skinName[0];
             // fall through
         case 3:
-            skinName[1] = skinName[0];
-            externalSkinName[1] = externalSkinName[0];
+            skinName[1] = "Landscape";
+            externalSkinName[1] = topStorageDir() + "/Free42/" + skinName[1];
             keyClicksEnabled = true;
             // fall through
         case 4:
@@ -1377,6 +1405,7 @@ public class Free42Activity extends Activity {
         @SuppressWarnings("unused") public boolean enable_ext_locat;
         @SuppressWarnings("unused") public boolean enable_ext_heading;
         @SuppressWarnings("unused") public boolean enable_ext_time;
+        @SuppressWarnings("unused") public boolean enable_ext_fptest;
     }
 
     ///////////////////////////////////////////////////
@@ -1598,7 +1627,12 @@ public class Free42Activity extends Activity {
         if (ShellSpool.printToTxt) {
             try {
                 if (printTxtStream == null)
-                    printTxtStream = new FileOutputStream(ShellSpool.printToTxtFileName, true);
+                    if (new File(ShellSpool.printToTxtFileName).exists()) {
+                        printTxtStream = new FileOutputStream(ShellSpool.printToTxtFileName, true);
+                    } else {
+                        printTxtStream = new FileOutputStream(ShellSpool.printToTxtFileName);
+                        printTxtStream.write(new byte[] { (byte) 0xEF, (byte) 0xBB, (byte) 0xBF });
+                    }
                 ShellSpool.shell_spool_txt(text, printTxtStream);
             } catch (IOException e) {
                 if (printTxtStream != null) {
