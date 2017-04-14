@@ -34,3 +34,9 @@ There is more important stuff scattered around that belongs in the repository (o
 * (sourcecode of) the tools needed to run Free42S images on the forthcoming DM-42
 
 (the list is probably not finished)
+
+# Update May 2017
+
+It appears that Thomas Okken has, after all, decided to also put Free42s under Git: https://github.com/thomasokken/free42.
+
+This makes my fork useless, but I assume my repo contributed to this decision, which is a good one.
