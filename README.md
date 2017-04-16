@@ -35,6 +35,14 @@ There is more important stuff scattered around that belongs in the repository (o
 
 (the list is probably not finished)
 
+## problems in this project
+
+* [VERSION.rc]() is clearly NOT to be versioned, as this is redundant information that is already stored in the VCS.
+* migrate to Gradle
+* needless dependency on SVN: for example, in the build scripts, SVN is invoked, while in fact this should be transparent to the build system.
+* keystore information, `local.properties` and other files should be generic should reside in template files (gitignored) with dummy arguments
+* migrate to the https://developer.android.com/ndk/guides/standalone_toolchain.html[newer standalone toolchain creation].
+
 # Update May 2017
 
 It appears that Thomas Okken has, after all, decided to also put Free42s under Git: https://github.com/thomasokken/free42.
