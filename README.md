@@ -48,3 +48,9 @@ There is more important stuff scattered around that belongs in the repository (o
 It appears that Thomas Okken has, after all, decided to also put Free42s under Git: https://github.com/thomasokken/free42.
 
 This makes my fork useless, but I assume my repo contributed to this decision, which is a good one.
+
+# Update June 2017
+
+_Update to the previous comment: from what I remember, his repository included GitHub categories that were quite similar to mine. I think my initiative triggered something, but for some reason Thomas completely backtracked._
+
+Around May, the [Google group](https://groups.google.com/forum/#!topic/free42discuss/x2mzoyVAIdw) was closed and the [GitHub repository](https://github.com/thomasokken/free42.git) was removed. For me this reconfirms that Thomas is not quite prepared for open sourcing his code: it is highly questionable to withdraw such valuable resources from the community.
