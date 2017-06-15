@@ -54,3 +54,17 @@ This makes my fork useless, but I assume my repo contributed to this decision, w
 _Update to the previous comment: from what I remember, his repository included GitHub categories that were quite similar to mine. I think my initiative triggered something, but for some reason Thomas completely backtracked._
 
 Around May, the [Google group](https://groups.google.com/forum/#!topic/free42discuss/x2mzoyVAIdw) was closed and the [GitHub repository](https://github.com/thomasokken/free42.git) was removed. For me this reconfirms that Thomas is not quite prepared for open sourcing his code: it is highly questionable to withdraw such valuable resources from the community.
+
+Another significant evolution is the popup of various similar Git initiatives that all attempt to preserve (or contribute to) the Free42 project (not all are of the same quality...):
+- https://github.com/SammysHP/free42-linux-archive
+- https://github.com/sfsam/free42
+- https://github.com/melak/free42
+- https://github.com/cygwinports/free42
+- https://github.com/jackokring/free42
+- https://github.com/jeansch/pkg-free42
+
+As these are all isolated efforts, they might suffer from not having been cloned from the main repo (I didn't check). This is the result of Thomas Okken stubbornly sticking to tarball releases.
+
+And several repos that contribute, and should all be centralised - in the end, these all depend on each other and on the main Free42 project:
+- https://github.com/ahlstromcj/free42-resources
+- https://github.com/jch42/Free42x
