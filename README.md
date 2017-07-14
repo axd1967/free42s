@@ -1,6 +1,6 @@
 This is my own README for the [Free42 project](http://thomasokken.com/free42). Please see also the original [README](README).
 
-Recently I discovered that an HP42S clone might surface from SwissMicros, and I contacted the [Free42S forum](https://groups.google.com/forum/#!forum/free42discuss) to see if there was any willingness to further open source this project.
+Recently I discovered that an HP42S clone might surface from SwissMicros, and I contacted the (currently deactivated) [Free42S forum](https://groups.google.com/forum/#!forum/free42discuss) to see if there was any willingness to further open source this project.
 
 One might wonder what the relation is between those two projects: it's all about **preservation**.
 
@@ -37,15 +37,17 @@ There is more important stuff scattered around that belongs in the repository (o
 
 ## problems in this project
 
-* [VERSION.rc]() is clearly NOT to be versioned, as this is redundant information that is already stored in the VCS.
+_These are only some observations._
+
+* [VERSION.rc](VERSION.rc) is clearly NOT to be versioned, as this is redundant information that is already stored in the VCS (by using e.g. tags).
 * migrate to Gradle
 * needless dependency on SVN: for example, in the build scripts, SVN is invoked, while in fact this should be transparent to the build system.
 * keystore information, `local.properties` and other files should be generic should reside in template files (gitignored) with dummy arguments
-* migrate to the https://developer.android.com/ndk/guides/standalone_toolchain.html[newer standalone toolchain creation].
+* migrate to the [newer standalone toolchain creation](https://developer.android.com/ndk/guides/standalone_toolchain.html).
 
 # Update May 2017
 
-It appears that Thomas Okken has, after all, decided to also put Free42s under Git: https://github.com/thomasokken/free42.
+It appears that Thomas Okken has, after all, decided to also put Free42s under Git: https://github.com/thomasokken/free42 (meanwhile removed).
 
 This makes my fork useless, but I assume my repo contributed to this decision, which is a good one.
 
