@@ -70,3 +70,6 @@ As these are all isolated efforts, they might suffer from not having been cloned
 And several repos that contribute, and should all be centralised - in the end, these all depend on each other and on the main Free42 project:
 - https://github.com/ahlstromcj/free42-resources
 - https://github.com/jch42/Free42x
+
+# Update October 2017
+I discovered the DM42 forum at SwissMicro's (https://forum.swissmicros.com), and when trying to bring up the problems there, I got booted there too. It really appears there is a significant smell of dictatorship around the figure of Thomas Okken.
